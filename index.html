@@ -508,6 +508,31 @@
       font-size: 14px;
       font-weight: 600;
     }
+    .statesList {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+      margin-top: 24px;
+      padding: 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+    }
+    .stateItem {
+      padding: 8px 12px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .stateItem:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
   </style>
 
   <!-- Structured data: Organization + Website -->
@@ -592,16 +617,58 @@
     <div class="container">
       <div class="stats">
         <div class="stat">
-          <div class="statNumber">1000+</div>
+          <div class="statNumber">9,000+</div>
           <div class="statLabel">Members Served</div>
         </div>
         <div class="stat">
-          <div class="statNumber">50+</div>
+          <div class="statNumber">30+</div>
           <div class="statLabel">States Available</div>
         </div>
         <div class="stat">
           <div class="statNumber">24/7</div>
           <div class="statLabel">Support Available</div>
+        </div>
+      </div>
+      <div style="margin-top: 40px; text-align: center;">
+        <h3 style="margin: 0 0 16px; font-size: 20px; color: var(--fg); font-weight: 700;">Currently Serving 36 States</h3>
+        <p style="color: var(--muted); margin-bottom: 20px;">We're expanding our reach to serve more patients nationwide.</p>
+        <div class="statesList">
+          <div class="stateItem">Alabama</div>
+          <div class="stateItem">Arizona</div>
+          <div class="stateItem">Arkansas</div>
+          <div class="stateItem">California</div>
+          <div class="stateItem">Colorado</div>
+          <div class="stateItem">Connecticut</div>
+          <div class="stateItem">Florida</div>
+          <div class="stateItem">Georgia</div>
+          <div class="stateItem">Illinois</div>
+          <div class="stateItem">Indiana</div>
+          <div class="stateItem">Iowa</div>
+          <div class="stateItem">Kansas</div>
+          <div class="stateItem">Kentucky</div>
+          <div class="stateItem">Louisiana</div>
+          <div class="stateItem">Maryland</div>
+          <div class="stateItem">Massachusetts</div>
+          <div class="stateItem">Michigan</div>
+          <div class="stateItem">Minnesota</div>
+          <div class="stateItem">Missouri</div>
+          <div class="stateItem">Nebraska</div>
+          <div class="stateItem">Nevada</div>
+          <div class="stateItem">New Jersey</div>
+          <div class="stateItem">New Mexico</div>
+          <div class="stateItem">New York</div>
+          <div class="stateItem">North Carolina</div>
+          <div class="stateItem">Ohio</div>
+          <div class="stateItem">Oklahoma</div>
+          <div class="stateItem">Oregon</div>
+          <div class="stateItem">Pennsylvania</div>
+          <div class="stateItem">South Carolina</div>
+          <div class="stateItem">Tennessee</div>
+          <div class="stateItem">Texas</div>
+          <div class="stateItem">Utah</div>
+          <div class="stateItem">Virginia</div>
+          <div class="stateItem">Washington</div>
+          <div class="stateItem">Wisconsin</div>
         </div>
       </div>
     </div>
@@ -947,7 +1014,7 @@
             <span>What states do you serve?</span>
           </summary>
           <div class="answer">
-            Fountain Vitality serves patients in 50+ states, though specific services and availability may vary by state regulations. Check with our team or visit <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener">Fountain.net</a> for current availability in your area.
+            Fountain Vitality serves patients in 30+ states, though specific services and availability may vary by state regulations. We currently serve: Alabama, Arizona, Arkansas, California, Colorado, Connecticut, Florida, Georgia, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maryland, Massachusetts, Michigan, Minnesota, Missouri, Nebraska, Nevada, New Jersey, New Mexico, New York, North Carolina, Ohio, Oklahoma, Oregon, Pennsylvania, South Carolina, Tennessee, Texas, Utah, Virginia, Washington, and Wisconsin. Check with our team or visit <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener">Fountain.net</a> for current availability in your area.
           </div>
         </details>
         <details>
