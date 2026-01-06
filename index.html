@@ -43,6 +43,13 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0066cc" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Fountain Vitality" />
+  
   <!-- Analytics Placeholders -->
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -311,6 +318,425 @@
       .grid.cols2, .grid.cols3, .grid.cols4 { grid-template-columns: 1fr; }
       .navlinks { display: none; }
       .hero { padding: 60px 0 40px; }
+    }
+    /* Mobile Menu */
+    .mobileMenuToggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+    .mobileMenuToggle span {
+      width: 24px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .mobileMenuToggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .mobileMenuToggle.active span:nth-child(2) { opacity: 0; }
+    .mobileMenuToggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    .mobileMenu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(250, 251, 252, 0.98);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      padding: 80px 20px 20px;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .mobileMenu.active { display: flex; }
+    .mobileMenu a {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .mobileMenu a:hover {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+    @media (max-width: 740px) {
+      .mobileMenuToggle { display: flex; }
+    }
+    /* Scroll Progress Indicator */
+    .scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--grad-colorful);
+      z-index: 1000;
+      transition: width 0.1s ease;
+    }
+    /* Back to Top Button */
+    .backToTop {
+      position: fixed;
+      bottom: 100px;
+      right: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--grad-colorful);
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+      z-index: 49;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .backToTop.visible { display: flex; }
+    .backToTop:hover {
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+    }
+    /* Sticky CTA Bar */
+    .stickyCTA {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-top: 2px solid var(--border);
+      padding: 16px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+      z-index: 48;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .stickyCTA.visible { display: flex; }
+    .stickyCTA .btn { margin: 0; }
+    /* Scroll Animations */
+    .fadeIn {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fadeIn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Loading States */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s ease-in-out infinite;
+    }
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* Exit Intent Popup */
+    .exitPopup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .exitPopup.active { display: flex; }
+    .exitPopupContent {
+      background: white;
+      border-radius: var(--radius2);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .exitPopupClose {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .exitPopupClose:hover {
+      background: var(--accent);
+      color: white;
+      transform: rotate(90deg);
+    }
+    /* Social Proof Widgets */
+    .socialProof {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--green-light);
+      border: 1.5px solid var(--green);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--green);
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .socialProof .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    /* Testimonials Carousel */
+    .testimonialsCarousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonialsTrack {
+      display: flex;
+      transition: transform 0.5s ease;
+      gap: 20px;
+    }
+    .testimonialSlide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+    .carouselControls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .carouselBtn {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .carouselBtn.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+    /* Cost Calculator */
+    .calculator {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .calculatorInput {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      margin: 12px 0;
+      transition: border-color 0.2s ease;
+    }
+    .calculatorInput:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+    }
+    .calculatorResult {
+      margin-top: 24px;
+      padding: 24px;
+      background: var(--accent-light);
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+    /* Symptom Checker */
+    .symptomChecker {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .symptomOption {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      margin: 8px 0;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .symptomOption:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+    .symptomOption input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    /* Dark Mode */
+    [data-theme="dark"] {
+      --bg: #0a1629;
+      --fg: #fafbfc;
+      --muted: #8b9aab;
+      --border: #1e293b;
+      --card: #1a2332;
+    }
+    .darkModeToggle {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--grad-colorful);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+      z-index: 49;
+      transition: all 0.3s ease;
+    }
+    .darkModeToggle:hover {
+      transform: scale(1.1) rotate(180deg);
+    }
+    /* Video Section */
+    .videoContainer {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius2);
+      background: var(--bg);
+      margin-top: 32px;
+    }
+    .videoContainer iframe,
+    .videoContainer video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius2);
+    }
+    /* FAQ Search */
+    .faqSearch {
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .faqSearchInput {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+    .faqSearchInput:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+    }
+    .faqSearchIcon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: var(--muted);
+    }
+    /* Enhanced Focus Indicators */
+    *:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    /* Skip to Content */
+    .skipToContent {
+      position: absolute;
+      top: -100px;
+      left: 0;
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      z-index: 10000;
+      border-radius: 0 0 8px 0;
+    }
+    .skipToContent:focus {
+      top: 0;
+    }
+    /* Comparison Table */
+    .comparisonTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      background: var(--card);
+      border-radius: var(--radius2);
+      overflow: hidden;
+    }
+    .comparisonTable th,
+    .comparisonTable td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparisonTable th {
+      background: var(--accent-light);
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .comparisonTable tr:hover {
+      background: var(--bg);
+    }
+    .comparisonTable .check {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .comparisonTable .cross {
+      color: var(--muted);
+      opacity: 0.5;
     }
     .card {
       background: var(--card);
@@ -1210,14 +1636,20 @@
   <div id="top" class="hero">
     <div class="container">
       <span class="badge">Concierge telehealth • TRT & HRT</span>
-      <h1>Be your greatest self with expert, concierge TRT & HRT—delivered to your doorstep.</h1>
-      <p>
+      <h1 class="fadeIn">Be your greatest self with expert, concierge TRT & HRT—delivered to your doorstep.</h1>
+      <p class="fadeIn">
         A premium telehealth experience built around convenience: online intake, clinician guidance,
         ongoing monitoring, and support when you need it. Our <strong>testosterone replacement therapy (TRT)</strong> and <strong>hormone replacement therapy (HRT)</strong> services are available across 36 states with flexible delivery options including <strong>testosterone injections</strong> and <strong>topical cream</strong>. Experience <strong>concierge hormone therapy</strong> with all-inclusive pricing, licensed clinicians, and medications delivered directly to your home. <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener">Learn more at Fountain.net →</a>
       </p>
-      <div class="ctaRow">
+      <div class="ctaRow fadeIn">
         <a class="btn primary" href="https://fountain.net" target="_blank" rel="noopener">See if I qualify</a>
         <a class="btn" href="#programs">Explore programs</a>
+      </div>
+      <div class="fadeIn" style="margin-top: 24px;">
+        <div class="socialProof">
+          <span class="dot"></span>
+          <span>127 people viewed this page today</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1482,8 +1914,74 @@
     </div>
   </section>
 
+  <!-- Cost Calculator -->
+  <section class="section anchorOffset alt">
+    <div class="container">
+      <h2>Calculate Your Cost</h2>
+      <p class="lead">
+        Estimate your monthly and annual costs with our simple calculator.
+      </p>
+      <div class="calculator fadeIn">
+        <form id="calculatorForm">
+          <label for="planSelect" style="display: block; margin-bottom: 8px; font-weight: 600;">Select Plan:</label>
+          <select id="planSelect" class="calculatorInput" required>
+            <option value="trt">FountainTRT - $199/month</option>
+            <option value="hrt">FountainHRT - $199/month</option>
+          </select>
+          <label for="monthsInput" style="display: block; margin-bottom: 8px; font-weight: 600; margin-top: 16px;">Number of Months:</label>
+          <input type="number" id="monthsInput" class="calculatorInput" min="1" max="24" value="12" required />
+          <button type="submit" class="btn primary" style="width: 100%; margin-top: 16px; justify-content: center;">Calculate</button>
+        </form>
+        <div id="calculatorResult" class="calculatorResult" style="display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Symptom Checker -->
+  <section class="section anchorOffset">
+    <div class="container">
+      <h2>Quick Symptom Assessment</h2>
+      <p class="lead">
+        Check which symptoms you're experiencing to see if hormone therapy might help.
+      </p>
+      <div class="symptomChecker fadeIn">
+        <h3 style="margin: 0 0 20px;">Common Symptoms (Select all that apply):</h3>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom1" />
+          <label for="symptom1" style="cursor: pointer; flex: 1;">Fatigue or low energy</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom2" />
+          <label for="symptom2" style="cursor: pointer; flex: 1;">Low libido or sexual function</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom3" />
+          <label for="symptom3" style="cursor: pointer; flex: 1;">Mood changes or irritability</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom4" />
+          <label for="symptom4" style="cursor: pointer; flex: 1;">Hot flashes or night sweats</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom5" />
+          <label for="symptom5" style="cursor: pointer; flex: 1;">Sleep disturbances</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom6" />
+          <label for="symptom6" style="cursor: pointer; flex: 1;">Reduced muscle mass or strength</label>
+        </div>
+        <div class="symptomOption">
+          <input type="checkbox" id="symptom7" />
+          <label for="symptom7" style="cursor: pointer; flex: 1;">Brain fog or difficulty concentrating</label>
+        </div>
+        <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; margin-top: 24px; justify-content: center;">Get Professional Assessment →</a>
+        <p style="margin: 16px 0 0; font-size: 12px; color: var(--muted); text-align: center;">This is not a medical diagnosis. Consult a licensed clinician for proper evaluation.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
-  <section id="pricing" class="section anchorOffset">
+  <section id="pricing" class="section anchorOffset alt">
     <div class="container">
       <h2>Transparent Pricing</h2>
       <p class="lead">
@@ -1535,6 +2033,23 @@
     </div>
   </section>
 
+  <!-- Video Section -->
+  <section class="section anchorOffset">
+    <div class="container">
+      <h2>See How It Works</h2>
+      <p class="lead">
+        Watch how our concierge approach makes hormone therapy simple, convenient, and supportive.
+      </p>
+      <div class="videoContainer fadeIn">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: var(--muted);">
+          <div style="font-size: 48px; margin-bottom: 16px;">▶️</div>
+          <p style="font-size: 18px; font-weight: 600;">Video Coming Soon</p>
+          <p style="font-size: 14px;">Learn about our process and hear from our members</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Reviews -->
   <section id="reviews" class="section anchorOffset alt">
     <div class="container">
@@ -1543,39 +2058,71 @@
         Real experiences from people who wanted a clearer, more supportive path. Individual results vary.
       </p>
 
-      <div class="grid cols3">
-        <div class="card" itemscope itemtype="https://schema.org/Review">
-          <div class="quote" itemprop="reviewBody">"Super smooth process and great communication. The team really cares about your journey."</div>
-          <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <span itemprop="name">A.F.</span>
+      <div class="testimonialsCarousel fadeIn">
+        <div class="testimonialsTrack">
+          <div class="testimonialSlide">
+            <div class="grid cols3">
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"Super smooth process and great communication. The team really cares about your journey."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">A.F.</span>
+                </div>
+                <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
+                <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
+                  <meta itemprop="ratingValue" content="5" />
+                  <meta itemprop="bestRating" content="5" />
+                </div>
+              </div>
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"I finally feel like I have a plan and support. The convenience factor is unmatched."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">J.M.</span>
+                </div>
+                <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
+                <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
+                  <meta itemprop="ratingValue" content="5" />
+                  <meta itemprop="bestRating" content="5" />
+                </div>
+              </div>
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"Convenient, professional, and easy to follow. Best decision I've made for my health."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">S.K.</span>
+                </div>
+                <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
+                <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
+                  <meta itemprop="ratingValue" content="5" />
+                  <meta itemprop="bestRating" content="5" />
+                </div>
+              </div>
+            </div>
           </div>
-          <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
+          <div class="testimonialSlide">
+            <div class="grid cols3">
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"The personalized approach made all the difference. I felt heard and supported throughout."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">M.R.</span>
+                </div>
+              </div>
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"Fast, professional, and results-driven. Everything I needed in one place."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">T.W.</span>
+                </div>
+              </div>
+              <div class="card" itemscope itemtype="https://schema.org/Review">
+                <div class="quote" itemprop="reviewBody">"No more waiting rooms or pharmacy trips. This is how healthcare should be."</div>
+                <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                  <span itemprop="name">D.L.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="card" itemscope itemtype="https://schema.org/Review">
-          <div class="quote" itemprop="reviewBody">"I finally feel like I have a plan and support. The convenience factor is unmatched."</div>
-          <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <span itemprop="name">J.M.</span>
-          </div>
-          <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
-          </div>
-        </div>
-        <div class="card" itemscope itemtype="https://schema.org/Review">
-          <div class="quote" itemprop="reviewBody">"Convenient, professional, and easy to follow. Best decision I've made for my health."</div>
-          <div class="name" itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <span itemprop="name">S.K.</span>
-          </div>
-          <meta itemprop="itemReviewed" itemscope itemtype="https://schema.org/Service" content="Fountain Vitality TRT & HRT Services" />
-          <div itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating" style="display: none;">
-            <meta itemprop="ratingValue" content="5" />
-            <meta itemprop="bestRating" content="5" />
-          </div>
+        <div class="carouselControls">
+          <button class="carouselBtn active" aria-label="Slide 1"></button>
+          <button class="carouselBtn" aria-label="Slide 2"></button>
         </div>
       </div>
       
@@ -1629,6 +2176,54 @@
       </div>
       <div style="text-align: center; margin-top: 32px;">
         <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener">Experience the difference →</a>
+      </div>
+      
+      <!-- Comparison Table -->
+      <div class="fadeIn" style="margin-top: 48px;">
+        <h3 style="margin: 0 0 24px; text-align: center;">Detailed Comparison</h3>
+        <div style="overflow-x: auto;">
+          <table class="comparisonTable">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Fountain Vitality</th>
+                <th>Traditional Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Support Availability</strong></td>
+                <td class="check">✓ 24/7</td>
+                <td class="cross">Business hours only</td>
+              </tr>
+              <tr>
+                <td><strong>Pricing Model</strong></td>
+                <td class="check">✓ All-inclusive</td>
+                <td class="cross">Separate fees</td>
+              </tr>
+              <tr>
+                <td><strong>Medication Delivery</strong></td>
+                <td class="check">✓ To your door</td>
+                <td class="cross">Pharmacy pickup</td>
+              </tr>
+              <tr>
+                <td><strong>Monitoring</strong></td>
+                <td class="check">✓ Regular check-ins</td>
+                <td class="cross">Infrequent</td>
+              </tr>
+              <tr>
+                <td><strong>Delivery Options (TRT)</strong></td>
+                <td class="check">✓ Injections & Cream</td>
+                <td class="cross">Limited options</td>
+              </tr>
+              <tr>
+                <td><strong>Intake Process</strong></td>
+                <td class="check">✓ Online, streamlined</td>
+                <td class="cross">Multiple appointments</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -1741,6 +2336,11 @@
     <div class="container">
       <h2>Frequently Asked Questions</h2>
       <p class="lead">General education — not medical advice. A licensed clinician can help determine what's appropriate for you. <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener">More FAQs at Fountain.net →</a></p>
+
+      <div class="faqSearch fadeIn">
+        <span class="faqSearchIcon">🔍</span>
+        <input type="text" id="faqSearch" class="faqSearchInput" placeholder="Search FAQs..." aria-label="Search frequently asked questions" />
+      </div>
 
       <div class="faq" role="region" aria-label="Frequently Asked Questions">
         <details open>
@@ -1955,9 +2555,353 @@
     </div>
   </footer>
 
+  <!-- Skip to Content Link -->
+  <a href="#main-content" class="skipToContent">Skip to main content</a>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scrollProgress" id="scrollProgress"></div>
+
+  <!-- Back to Top Button -->
+  <a href="#top" class="backToTop" id="backToTop" aria-label="Back to top">↑</a>
+
+  <!-- Sticky CTA Bar -->
+  <div class="stickyCTA" id="stickyCTA">
+    <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener">Get Started</a>
+    <a href="#pricing" class="btn">View Pricing</a>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <button class="darkModeToggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
   <!-- Live Chat Button -->
   <a href="https://fountain.net" class="liveChat" target="_blank" rel="noopener" aria-label="Live chat support" title="Chat with us">
     💬
   </a>
+
+  <!-- Exit Intent Popup -->
+  <div class="exitPopup" id="exitPopup">
+    <div class="exitPopupContent">
+      <button class="exitPopupClose" id="exitPopupClose" aria-label="Close">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Wait! Don't Miss Out</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">Get a free consultation when you sign up today. Limited time offer!</p>
+      <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center;">Claim Your Free Consultation</a>
+      <p style="margin: 16px 0 0; font-size: 12px; color: var(--muted); text-align: center;">No credit card required</p>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+
+  <!-- JavaScript for Interactive Features -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.createElement('button');
+    mobileMenuToggle.className = 'mobileMenuToggle';
+    mobileMenuToggle.setAttribute('aria-label', 'Toggle menu');
+    mobileMenuToggle.innerHTML = '<span></span><span></span><span></span>';
+    document.querySelector('.nav').insertBefore(mobileMenuToggle, document.querySelector('.navlinks'));
+
+    const mobileMenu = document.createElement('div');
+    mobileMenu.className = 'mobileMenu';
+    const navLinks = document.querySelector('.navlinks').cloneNode(true);
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+      });
+    });
+    mobileMenu.appendChild(navLinks);
+    document.body.appendChild(mobileMenu);
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Scroll Progress Indicator
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Sticky CTA Bar
+    const stickyCTA = document.getElementById('stickyCTA');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 800) {
+        stickyCTA.classList.add('visible');
+      } else {
+        stickyCTA.classList.remove('visible');
+      }
+    });
+
+    // Scroll Animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.fadeIn').forEach(el => observer.observe(el));
+
+    // Exit Intent Popup
+    let exitIntentShown = localStorage.getItem('exitIntentShown');
+    document.addEventListener('mouseout', (e) => {
+      if (!exitIntentShown && e.clientY < 0) {
+        document.getElementById('exitPopup').classList.add('active');
+        localStorage.setItem('exitIntentShown', 'true');
+      }
+    });
+    document.getElementById('exitPopupClose').addEventListener('click', () => {
+      document.getElementById('exitPopup').classList.remove('active');
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      darkModeToggle.textContent = '☀️';
+    }
+    darkModeToggle.addEventListener('click', () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        darkModeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        darkModeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Testimonials Carousel
+    let currentSlide = 0;
+    const testimonialSlides = document.querySelectorAll('.testimonialSlide');
+    const carouselBtns = document.querySelectorAll('.carouselBtn');
+    if (testimonialSlides.length > 0) {
+      function showSlide(index) {
+        const track = document.querySelector('.testimonialsTrack');
+        if (track) {
+          track.style.transform = `translateX(-${index * 100}%)`;
+          carouselBtns.forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+          });
+        }
+      }
+      carouselBtns.forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+          currentSlide = index;
+          showSlide(currentSlide);
+        });
+      });
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % testimonialSlides.length;
+        showSlide(currentSlide);
+      }, 5000);
+    }
+
+    // Cost Calculator
+    const calculatorForm = document.getElementById('calculatorForm');
+    if (calculatorForm) {
+      calculatorForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const plan = document.getElementById('planSelect').value;
+        const months = parseInt(document.getElementById('monthsInput').value) || 1;
+        const monthlyCost = plan === 'trt' || plan === 'hrt' ? 199 : 0;
+        const totalCost = monthlyCost * months;
+        const savings = months >= 12 ? Math.floor(totalCost * 0.1) : 0;
+        const resultDiv = document.getElementById('calculatorResult');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+          <h3 style="margin: 0 0 12px; color: var(--accent);">Your Estimate</h3>
+          <div style="font-size: 32px; font-weight: 800; margin: 16px 0; background: var(--grad-colorful); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            $${totalCost.toLocaleString()}
+          </div>
+          <p style="margin: 8px 0; color: var(--muted);">${months} month${months > 1 ? 's' : ''} × $${monthlyCost}/mo</p>
+          ${savings > 0 ? `<p style="margin: 8px 0; color: var(--success); font-weight: 600;">Save $${savings} with annual plan!</p>` : ''}
+        `;
+        trackEvent('Calculator', 'Calculate', plan + '-' + months);
+      });
+    }
+
+    // FAQ Search
+    const faqSearchInput = document.getElementById('faqSearch');
+    if (faqSearchInput) {
+      faqSearchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        document.querySelectorAll('details').forEach(detail => {
+          const text = detail.textContent.toLowerCase();
+          const summary = detail.querySelector('summary').textContent.toLowerCase();
+          if (text.includes(searchTerm) || summary.includes(searchTerm)) {
+            detail.style.display = '';
+            if (searchTerm && (text.includes(searchTerm) || summary.includes(searchTerm))) {
+              detail.open = true;
+            }
+          } else {
+            detail.style.display = 'none';
+          }
+        });
+      });
+    }
+
+    // Analytics Tracking
+    function trackEvent(category, action, label) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+          event_category: category,
+          event_label: label
+        });
+      }
+    }
+
+    // Track Scroll Depth
+    let scrollDepths = [25, 50, 75, 100];
+    let trackedDepths = [];
+    window.addEventListener('scroll', () => {
+      const scrollPercent = Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+      scrollDepths.forEach(depth => {
+        if (scrollPercent >= depth && !trackedDepths.includes(depth)) {
+          trackedDepths.push(depth);
+          trackEvent('Engagement', 'Scroll Depth', depth + '%');
+        }
+      });
+    });
+
+    // Track Clicks
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('click', (e) => {
+        const text = el.textContent.trim();
+        const href = el.href || '';
+        trackEvent('Click', 'Button Click', text || href);
+      });
+    });
+
+    // Form Abandonment Tracking
+    document.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('focus', () => {
+        trackEvent('Form', 'Field Focus', field.name || field.id);
+      });
+      field.addEventListener('blur', () => {
+        if (!field.value) {
+          trackEvent('Form', 'Field Abandoned', field.name || field.id);
+        }
+      });
+    });
+
+    // Smooth Scroll Enhancement
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href !== '') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            trackEvent('Navigation', 'Anchor Click', href);
+          }
+        }
+      });
+    });
+
+    // Service Worker Registration (PWA)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      // Escape key closes modals
+      if (e.key === 'Escape') {
+        document.getElementById('exitPopup')?.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+      }
+      // Alt + M opens mobile menu
+      if (e.altKey && e.key === 'm') {
+        mobileMenuToggle.click();
+      }
+      // Alt + T toggles dark mode
+      if (e.altKey && e.key === 't') {
+        darkModeToggle.click();
+      }
+    });
+
+    // Form Validation Enhancement
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.style.borderColor = 'var(--orange)';
+            input.addEventListener('input', () => {
+              input.style.borderColor = 'var(--border)';
+            }, { once: true });
+          }
+        });
+        if (!isValid) {
+          e.preventDefault();
+          trackEvent('Form', 'Validation Error', form.id || 'unknown');
+        }
+      });
+    });
+
+    // Lazy Load Images (when added)
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+              observer.unobserve(img);
+            }
+          }
+        });
+      });
+      document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+    }
+
+    // Performance Monitoring
+    window.addEventListener('load', () => {
+      if ('performance' in window) {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        trackEvent('Performance', 'Page Load', Math.round(pageLoadTime) + 'ms');
+      }
+    });
+  </script>
+  </main>
 </body>
 </html>
