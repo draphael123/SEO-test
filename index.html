@@ -1387,6 +1387,333 @@
     .resourceCard:hover {
       transform: translateY(-4px);
     }
+    /* New Features CSS */
+    /* Request Callback Form */
+    .callbackModal, .consultationModal, .quoteModal, .questionModal, .infoModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 10001;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .callbackModal.active, .consultationModal.active, .quoteModal.active, .questionModal.active, .infoModal.active {
+      display: flex;
+    }
+    .modalContent {
+      background: white;
+      border-radius: var(--radius2);
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideUp 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modalClose {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .modalClose:hover {
+      background: var(--accent);
+      color: white;
+      transform: rotate(90deg);
+    }
+    .formGroup {
+      margin-bottom: 20px;
+    }
+    .formGroup label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--fg);
+    }
+    .formGroup input, .formGroup select, .formGroup textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      transition: border-color 0.2s ease;
+    }
+    .formGroup input:focus, .formGroup select:focus, .formGroup textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+    }
+    /* Urgency Elements */
+    .urgencyBanner {
+      background: var(--grad-warm);
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .countdownTimer {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-left: 12px;
+      font-weight: 800;
+    }
+    .countdownItem {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 8px;
+      border-radius: 6px;
+      min-width: 40px;
+      text-align: center;
+    }
+    /* Print & Share Buttons */
+    .printShareBar {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 48;
+    }
+    .printBtn, .shareBtn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+    .printBtn:hover, .shareBtn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
+    /* Accessibility Features */
+    .accessibilityBar {
+      position: fixed;
+      top: 80px;
+      left: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 48;
+      background: var(--card);
+      padding: 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 2px solid var(--border);
+    }
+    .accessibilityBtn {
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .accessibilityBtn:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    html[data-font-size="large"] { font-size: 120%; }
+    html[data-font-size="xlarge"] { font-size: 140%; }
+    html[data-contrast="high"] {
+      --bg: #ffffff;
+      --fg: #000000;
+      --muted: #333333;
+      --border: #000000;
+    }
+    /* Compare Plans Tool */
+    .compareTool {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .compareToggle {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .compareToggleBtn {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .compareToggleBtn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    /* Downloadable Resources */
+    .downloadCard {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      margin: 12px 0;
+      transition: all 0.2s ease;
+    }
+    .downloadCard:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+    .downloadIcon {
+      font-size: 32px;
+    }
+    /* Progress Tracker */
+    .progressTracker {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .progressStep {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      margin: 12px 0;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    .progressStep.completed {
+      background: var(--green-light);
+      border-left: 4px solid var(--success);
+    }
+    .progressStep.active {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+    }
+    .progressStep.inactive {
+      background: var(--bg);
+      opacity: 0.6;
+    }
+    .progressCheck {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--success);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    /* Related Content */
+    .relatedContent {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 2px solid var(--border);
+    }
+    .relatedGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .relatedItem {
+      padding: 16px;
+      background: var(--accent-light);
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.2s ease;
+    }
+    .relatedItem:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow);
+    }
+    /* Additional Trust Badges */
+    .securityBadges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .securityBadge {
+      padding: 8px 16px;
+      background: var(--green-light);
+      border: 1.5px solid var(--green);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    /* More CTAs */
+    .inlineCTA {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0;
+      padding: 10px 16px;
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+      border-radius: 8px;
+      color: var(--accent);
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .inlineCTA:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 740px) {
+      .printShareBar, .accessibilityBar {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        flex-direction: row;
+        margin: 16px 0;
+      }
+    }
   </style>
 
   <!-- Structured data: Organization + Website + MedicalBusiness -->
@@ -1644,11 +1971,23 @@
       <div class="ctaRow fadeIn">
         <a class="btn primary" href="https://fountain.net" target="_blank" rel="noopener">See if I qualify</a>
         <a class="btn" href="#programs">Explore programs</a>
+        <button class="btn secondary" onclick="document.getElementById('callbackModal').classList.add('active')">Request Callback</button>
+        <button class="btn" onclick="document.getElementById('consultationModal').classList.add('active')">Schedule Consultation</button>
       </div>
       <div class="fadeIn" style="margin-top: 24px;">
         <div class="socialProof">
           <span class="dot"></span>
           <span>127 people viewed this page today</span>
+        </div>
+      </div>
+      <div class="fadeIn" style="margin-top: 16px;">
+        <div class="urgencyBanner">
+          ⚡ Limited Time: Free consultation when you sign up this week! 
+          <span class="countdownTimer" id="countdownTimer">
+            <span class="countdownItem" id="hours">23</span>:
+            <span class="countdownItem" id="minutes">59</span>:
+            <span class="countdownItem" id="seconds">59</span>
+          </span>
         </div>
       </div>
     </div>
@@ -1964,6 +2303,13 @@
         <div class="trustBadge">✓ FDA-Regulated Medications</div>
         <div class="trustBadge">✓ No Hidden Fees</div>
       </div>
+      <div class="securityBadges">
+        <div class="securityBadge">🔒 SSL Encrypted</div>
+        <div class="securityBadge">🛡️ HIPAA Protected</div>
+        <div class="securityBadge">✅ Verified Secure</div>
+        <div class="securityBadge">💳 Secure Payments</div>
+        <div class="securityBadge">📋 Privacy Guaranteed</div>
+      </div>
     </div>
   </section>
 
@@ -2110,8 +2456,48 @@
       </div>
       <div style="text-align: center; margin-top: 32px;">
         <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener">Experience the difference →</a>
+        <button class="btn secondary" onclick="document.getElementById('quoteModal').classList.add('active')" style="margin-left: 12px;">Get a Quote →</button>
+        <button class="btn" onclick="document.getElementById('consultationModal').classList.add('active')" style="margin-left: 12px;">Schedule Consultation →</button>
       </div>
       
+      <!-- Compare Plans Interactive Tool -->
+      <div class="compareTool fadeIn" style="margin-top: 48px;">
+        <h3 style="margin: 0 0 24px; text-align: center;">Compare Plans Side-by-Side</h3>
+        <div class="compareToggle">
+          <button class="compareToggleBtn active" onclick="showComparePlan('trt')">FountainTRT</button>
+          <button class="compareToggleBtn" onclick="showComparePlan('hrt')">FountainHRT</button>
+          <button class="compareToggleBtn" onclick="showComparePlan('both')">Both</button>
+        </div>
+        <div id="compareContent">
+          <div class="grid cols2">
+            <div class="card">
+              <h4>FountainTRT</h4>
+              <ul class="bullets" style="margin: 16px 0;">
+                <li>$199/month all-inclusive</li>
+                <li>Testosterone injections or cream</li>
+                <li>Clinician consultations</li>
+                <li>Lab work & monitoring</li>
+                <li>Doorstep delivery</li>
+                <li>24/7 support</li>
+              </ul>
+              <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with TRT</a>
+            </div>
+            <div class="card">
+              <h4>FountainHRT</h4>
+              <ul class="bullets" style="margin: 16px 0;">
+                <li>$199/month all-inclusive</li>
+                <li>Hormone replacement therapy</li>
+                <li>Clinician consultations</li>
+                <li>Lab work & monitoring</li>
+                <li>Doorstep delivery</li>
+                <li>24/7 support</li>
+              </ul>
+              <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with HRT</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Comparison Table -->
       <div class="fadeIn" style="margin-top: 48px;">
         <h3 style="margin: 0 0 24px; text-align: center;">Detailed Comparison</h3>
@@ -2198,6 +2584,43 @@
       <div style="text-align: center; margin-top: 32px;">
         <a href="https://fountain.net" class="btn" target="_blank" rel="noopener">View all resources →</a>
       </div>
+
+      <!-- Downloadable Resources -->
+      <div style="margin-top: 48px;">
+        <h3 style="margin: 0 0 24px;">Downloadable Resources</h3>
+        <div class="downloadCard">
+          <div class="downloadIcon">📄</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0 0 8px;">TRT Guide PDF</h4>
+            <p style="margin: 0; font-size: 14px; color: var(--muted);">Complete guide to Testosterone Replacement Therapy</p>
+          </div>
+          <a href="https://fountain.net" class="btn" target="_blank" rel="noopener">Download →</a>
+        </div>
+        <div class="downloadCard">
+          <div class="downloadIcon">📋</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0 0 8px;">HRT Information Packet</h4>
+            <p style="margin: 0; font-size: 14px; color: var(--muted);">Everything you need to know about Hormone Replacement Therapy</p>
+          </div>
+          <a href="https://fountain.net" class="btn" target="_blank" rel="noopener">Download →</a>
+        </div>
+        <div class="downloadCard">
+          <div class="downloadIcon">📊</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0 0 8px;">Symptom Checklist</h4>
+            <p style="margin: 0; font-size: 14px; color: var(--muted);">Track your symptoms and discuss with your clinician</p>
+          </div>
+          <a href="https://fountain.net" class="btn" target="_blank" rel="noopener">Download →</a>
+        </div>
+        <div class="downloadCard">
+          <div class="downloadIcon">💡</div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0 0 8px;">Treatment Journey Guide</h4>
+            <p style="margin: 0; font-size: 14px; color: var(--muted);">Step-by-step guide to your treatment process</p>
+          </div>
+          <a href="https://fountain.net" class="btn" target="_blank" rel="noopener">Download →</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2218,11 +2641,64 @@
     </div>
   </section>
 
+  <!-- Progress Tracker -->
+  <section class="section anchorOffset alt">
+    <div class="container">
+      <h2>Your Treatment Journey Progress</h2>
+      <p class="lead">Track your progress through each step of your hormone therapy journey.</p>
+      <div class="progressTracker fadeIn">
+        <div class="progressStep completed">
+          <div class="progressCheck">✓</div>
+          <div>
+            <strong>Step 1: Initial Assessment</strong>
+            <p style="margin: 4px 0 0; font-size: 14px; color: var(--muted);">Complete your online intake and health history</p>
+          </div>
+        </div>
+        <div class="progressStep completed">
+          <div class="progressCheck">✓</div>
+          <div>
+            <strong>Step 2: Clinician Review</strong>
+            <p style="margin: 4px 0 0; font-size: 14px; color: var(--muted);">Licensed clinician reviews your information</p>
+          </div>
+        </div>
+        <div class="progressStep active">
+          <div class="progressCheck">2</div>
+          <div>
+            <strong>Step 3: Lab Work</strong>
+            <p style="margin: 4px 0 0; font-size: 14px; color: var(--muted);">Complete necessary lab tests (if required)</p>
+          </div>
+        </div>
+        <div class="progressStep inactive">
+          <div class="progressCheck">3</div>
+          <div>
+            <strong>Step 4: Treatment Plan</strong>
+            <p style="margin: 4px 0 0; font-size: 14px; color: var(--muted);">Receive your personalized treatment plan</p>
+          </div>
+        </div>
+        <div class="progressStep inactive">
+          <div class="progressCheck">4</div>
+          <div>
+            <strong>Step 5: Ongoing Care</strong>
+            <p style="margin: 4px 0 0; font-size: 14px; color: var(--muted);">Regular monitoring and adjustments</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener">Start Your Journey →</a>
+        <button class="btn" onclick="document.getElementById('questionModal').classList.add('active')" style="margin-left: 12px;">Ask a Question</button>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section id="faq" class="section anchorOffset" style="padding-top: 0;">
     <div class="container">
       <h2>Frequently Asked Questions</h2>
       <p class="lead">General education — not medical advice. A licensed clinician can help determine what's appropriate for you. <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener">More FAQs at Fountain.net →</a></p>
+      <div style="text-align: center; margin-bottom: 24px;">
+        <button class="btn" onclick="document.getElementById('questionModal').classList.add('active')">Ask Your Own Question →</button>
+        <button class="btn" onclick="document.getElementById('infoModal').classList.add('active')" style="margin-left: 12px;">Request More Information →</button>
+      </div>
 
       <div class="faqSearch fadeIn">
         <span class="faqSearchIcon">🔍</span>
@@ -2404,6 +2880,41 @@
     </div>
   </section>
 
+  <!-- Related Content -->
+  <section class="section anchorOffset alt">
+    <div class="container">
+      <div class="relatedContent">
+        <h3 style="margin: 0 0 16px;">Related Content You Might Find Helpful</h3>
+        <div class="relatedGrid">
+          <div class="relatedItem">
+            <a href="#programs" class="fountainLink"><strong>Understanding TRT vs HRT</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Learn the differences between testosterone and hormone replacement therapy</p>
+          </div>
+          <div class="relatedItem">
+            <a href="#benefits" class="fountainLink"><strong>Potential Benefits Explained</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Discover what benefits you might experience with proper treatment</p>
+          </div>
+          <div class="relatedItem">
+            <a href="#pricing" class="fountainLink"><strong>Pricing & Plans</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">See our transparent, all-inclusive pricing structure</p>
+          </div>
+          <div class="relatedItem">
+            <a href="#comparison" class="fountainLink"><strong>Why Choose Fountain Vitality</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Compare our approach to traditional hormone therapy options</p>
+          </div>
+          <div class="relatedItem">
+            <a href="#reviews" class="fountainLink"><strong>Member Stories</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Read real experiences from our members</p>
+          </div>
+          <div class="relatedItem">
+            <a href="https://fountain.net" class="fountainLink" target="_blank" rel="noopener"><strong>Get Started Today</strong></a>
+            <p style="margin: 8px 0 0; font-size: 14px; color: var(--muted);">Begin your journey with a quick online assessment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact/Footer -->
   <footer id="contact" class="footer anchorOffset">
     <div class="container">
@@ -2474,6 +2985,187 @@
       <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center;">Claim Your Free Consultation</a>
       <p style="margin: 16px 0 0; font-size: 12px; color: var(--muted); text-align: center;">No credit card required</p>
     </div>
+  </div>
+
+  <!-- Request Callback Modal -->
+  <div class="callbackModal" id="callbackModal">
+    <div class="modalContent">
+      <button class="modalClose" onclick="document.getElementById('callbackModal').classList.remove('active')">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Request a Callback</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">We'll call you back within 24 hours to answer your questions.</p>
+      <form id="callbackForm" onsubmit="event.preventDefault(); alert('Thank you! We will call you back soon.'); document.getElementById('callbackModal').classList.remove('active');">
+        <div class="formGroup">
+          <label for="callbackName">Full Name *</label>
+          <input type="text" id="callbackName" name="name" required />
+        </div>
+        <div class="formGroup">
+          <label for="callbackPhone">Phone Number *</label>
+          <input type="tel" id="callbackPhone" name="phone" required />
+        </div>
+        <div class="formGroup">
+          <label for="callbackEmail">Email Address *</label>
+          <input type="email" id="callbackEmail" name="email" required />
+        </div>
+        <div class="formGroup">
+          <label for="callbackTime">Preferred Call Time</label>
+          <select id="callbackTime" name="time">
+            <option>Morning (9am-12pm)</option>
+            <option>Afternoon (12pm-5pm)</option>
+            <option>Evening (5pm-8pm)</option>
+            <option>Any time</option>
+          </select>
+        </div>
+        <div class="formGroup">
+          <label for="callbackMessage">Message (Optional)</label>
+          <textarea id="callbackMessage" name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Request Callback</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Schedule Consultation Modal -->
+  <div class="consultationModal" id="consultationModal">
+    <div class="modalContent">
+      <button class="modalClose" onclick="document.getElementById('consultationModal').classList.remove('active')">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Schedule a Consultation</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">Book a free consultation with one of our licensed clinicians.</p>
+      <form id="consultationForm" onsubmit="event.preventDefault(); alert('Thank you! We will contact you to confirm your consultation.'); document.getElementById('consultationModal').classList.remove('active');">
+        <div class="formGroup">
+          <label for="consultName">Full Name *</label>
+          <input type="text" id="consultName" name="name" required />
+        </div>
+        <div class="formGroup">
+          <label for="consultEmail">Email Address *</label>
+          <input type="email" id="consultEmail" name="email" required />
+        </div>
+        <div class="formGroup">
+          <label for="consultPhone">Phone Number *</label>
+          <input type="tel" id="consultPhone" name="phone" required />
+        </div>
+        <div class="formGroup">
+          <label for="consultDate">Preferred Date</label>
+          <input type="date" id="consultDate" name="date" />
+        </div>
+        <div class="formGroup">
+          <label for="consultService">Service Interest</label>
+          <select id="consultService" name="service">
+            <option>TRT (Testosterone Replacement Therapy)</option>
+            <option>HRT (Hormone Replacement Therapy)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Schedule Consultation</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Get a Quote Modal -->
+  <div class="quoteModal" id="quoteModal">
+    <div class="modalContent">
+      <button class="modalClose" onclick="document.getElementById('quoteModal').classList.remove('active')">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Get a Personalized Quote</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">Receive a customized quote based on your needs and location.</p>
+      <form id="quoteForm" onsubmit="event.preventDefault(); alert('Thank you! We will send you a personalized quote shortly.'); document.getElementById('quoteModal').classList.remove('active');">
+        <div class="formGroup">
+          <label for="quoteName">Full Name *</label>
+          <input type="text" id="quoteName" name="name" required />
+        </div>
+        <div class="formGroup">
+          <label for="quoteEmail">Email Address *</label>
+          <input type="email" id="quoteEmail" name="email" required />
+        </div>
+        <div class="formGroup">
+          <label for="quoteState">State *</label>
+          <select id="quoteState" name="state" required>
+            <option value="">Select your state</option>
+            <option>California</option>
+            <option>Texas</option>
+            <option>New York</option>
+            <option>Florida</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="formGroup">
+          <label for="quoteService">Service Interest *</label>
+          <select id="quoteService" name="service" required>
+            <option value="">Select a service</option>
+            <option>FountainTRT</option>
+            <option>FountainHRT</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Get Quote</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ask a Question Modal -->
+  <div class="questionModal" id="questionModal">
+    <div class="modalContent">
+      <button class="modalClose" onclick="document.getElementById('questionModal').classList.remove('active')">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Ask a Question</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">Have a question? We're here to help.</p>
+      <form id="questionForm" onsubmit="event.preventDefault(); alert('Thank you! We will respond to your question within 24 hours.'); document.getElementById('questionModal').classList.remove('active');">
+        <div class="formGroup">
+          <label for="questionName">Your Name *</label>
+          <input type="text" id="questionName" name="name" required />
+        </div>
+        <div class="formGroup">
+          <label for="questionEmail">Email Address *</label>
+          <input type="email" id="questionEmail" name="email" required />
+        </div>
+        <div class="formGroup">
+          <label for="questionText">Your Question *</label>
+          <textarea id="questionText" name="question" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Submit Question</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Request Information Modal -->
+  <div class="infoModal" id="infoModal">
+    <div class="modalContent">
+      <button class="modalClose" onclick="document.getElementById('infoModal').classList.remove('active')">×</button>
+      <h2 style="margin: 0 0 16px; font-size: 24px;">Request Information</h2>
+      <p style="margin: 0 0 24px; color: var(--muted);">Get detailed information about our services.</p>
+      <form id="infoForm" onsubmit="event.preventDefault(); alert('Thank you! We will send you detailed information shortly.'); document.getElementById('infoModal').classList.remove('active');">
+        <div class="formGroup">
+          <label for="infoName">Full Name *</label>
+          <input type="text" id="infoName" name="name" required />
+        </div>
+        <div class="formGroup">
+          <label for="infoEmail">Email Address *</label>
+          <input type="email" id="infoEmail" name="email" required />
+        </div>
+        <div class="formGroup">
+          <label for="infoInterest">What information are you interested in? *</label>
+          <select id="infoInterest" name="interest" required>
+            <option value="">Select an option</option>
+            <option>TRT Program Details</option>
+            <option>HRT Program Details</option>
+            <option>Pricing Information</option>
+            <option>Treatment Process</option>
+            <option>General Information</option>
+          </select>
+        </div>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Request Information</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Print & Share Buttons -->
+  <div class="printShareBar">
+    <button class="printBtn" onclick="window.print()" aria-label="Print page" title="Print this page">🖨️</button>
+    <button class="shareBtn" onclick="navigator.share ? navigator.share({title: document.title, url: window.location.href}) : alert('Share: ' + window.location.href)" aria-label="Share page" title="Share this page">📤</button>
+  </div>
+
+  <!-- Accessibility Bar -->
+  <div class="accessibilityBar">
+    <button class="accessibilityBtn" onclick="document.documentElement.setAttribute('data-font-size', document.documentElement.getAttribute('data-font-size') === 'large' ? 'xlarge' : document.documentElement.getAttribute('data-font-size') === 'xlarge' ? '' : 'large')">A+ Font Size</button>
+    <button class="accessibilityBtn" onclick="document.documentElement.setAttribute('data-contrast', document.documentElement.getAttribute('data-contrast') === 'high' ? '' : 'high')">High Contrast</button>
+    <button class="accessibilityBtn" onclick="document.getElementById('darkModeToggle').click()">Dark Mode</button>
   </div>
 
   <!-- Main Content Wrapper -->
@@ -2786,6 +3478,139 @@
         const perfData = window.performance.timing;
         const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
         trackEvent('Performance', 'Page Load', Math.round(pageLoadTime) + 'ms');
+      }
+    });
+
+    // Countdown Timer
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      const distance = tomorrow - now;
+      
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+    if (document.getElementById('countdownTimer')) {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // Compare Plans Tool
+    function showComparePlan(plan) {
+      const buttons = document.querySelectorAll('.compareToggleBtn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const content = document.getElementById('compareContent');
+      if (plan === 'trt') {
+        content.innerHTML = `
+          <div class="card">
+            <h4>FountainTRT</h4>
+            <ul class="bullets" style="margin: 16px 0;">
+              <li>$199/month all-inclusive</li>
+              <li>Testosterone injections or cream</li>
+              <li>Clinician consultations</li>
+              <li>Lab work & monitoring</li>
+              <li>Doorstep delivery</li>
+              <li>24/7 support</li>
+            </ul>
+            <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with TRT</a>
+          </div>
+        `;
+      } else if (plan === 'hrt') {
+        content.innerHTML = `
+          <div class="card">
+            <h4>FountainHRT</h4>
+            <ul class="bullets" style="margin: 16px 0;">
+              <li>$199/month all-inclusive</li>
+              <li>Hormone replacement therapy</li>
+              <li>Clinician consultations</li>
+              <li>Lab work & monitoring</li>
+              <li>Doorstep delivery</li>
+              <li>24/7 support</li>
+            </ul>
+            <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with HRT</a>
+          </div>
+        `;
+      } else {
+        content.innerHTML = `
+          <div class="grid cols2">
+            <div class="card">
+              <h4>FountainTRT</h4>
+              <ul class="bullets" style="margin: 16px 0;">
+                <li>$199/month all-inclusive</li>
+                <li>Testosterone injections or cream</li>
+                <li>Clinician consultations</li>
+                <li>Lab work & monitoring</li>
+                <li>Doorstep delivery</li>
+                <li>24/7 support</li>
+              </ul>
+              <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with TRT</a>
+            </div>
+            <div class="card">
+              <h4>FountainHRT</h4>
+              <ul class="bullets" style="margin: 16px 0;">
+                <li>$199/month all-inclusive</li>
+                <li>Hormone replacement therapy</li>
+                <li>Clinician consultations</li>
+                <li>Lab work & monitoring</li>
+                <li>Doorstep delivery</li>
+                <li>24/7 support</li>
+              </ul>
+              <a href="https://fountain.net" class="btn primary" target="_blank" rel="noopener" style="width: 100%; justify-content: center; margin-top: 16px;">Get Started with HRT</a>
+            </div>
+          </div>
+        `;
+      }
+      trackEvent('Interaction', 'Compare Plans', plan);
+    }
+
+    // Close modals on outside click
+    document.querySelectorAll('.callbackModal, .consultationModal, .quoteModal, .questionModal, .infoModal').forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+
+    // Close modals with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.callbackModal, .consultationModal, .quoteModal, .questionModal, .infoModal').forEach(modal => {
+          modal.classList.remove('active');
+        });
+      }
+    });
+
+    // Form tracking
+    document.querySelectorAll('#callbackForm, #consultationForm, #quoteForm, #questionForm, #infoForm').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        const formName = form.id.replace('Form', '');
+        trackEvent('Form', 'Submit', formName);
+      });
+    });
+
+    // Add more CTAs throughout page
+    document.querySelectorAll('.section').forEach(section => {
+      const ctaButtons = section.querySelectorAll('.btn.primary');
+      if (ctaButtons.length > 0 && Math.random() > 0.7) {
+        const inlineCTA = document.createElement('div');
+        inlineCTA.className = 'inlineCTA';
+        inlineCTA.innerHTML = '<a href="https://fountain.net" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">📞 Need help? Request a callback →</a>';
+        inlineCTA.onclick = () => document.getElementById('callbackModal').classList.add('active');
+        section.appendChild(inlineCTA);
       }
     });
   </script>
